@@ -1,38 +1,18 @@
 import React, {useState} from 'react';
 import './App.css';
+import { GiphyResults } from './GiphyResults';
+import { GiphySearch } from './GiphySearch';
 
 function App() {
-  const [giphySearch, setGiphySearch] =useState('Paris');
+  const [giphies, setGiphies] = useState<string[]>([]);
+  
+  const addGiphy = (giphy: string) => setGiphies([giphy, ...giphies])
 
   return (
-    <div className="App">
+    <div className="container">
       <h1>Giphy Search</h1>
-      <div>
-        <label>
-          Search Giphy: 
-          <input 
-            type="text" 
-            value={giphySearch}
-            onChange={e => setGiphySearch(e.target.value)}
-          />
-        </label>
-        <button>Search</button>
-      </div>
-
-      <div>
-        <h2>Results</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Test1</td></tr>
-            <tr></tr>
-          </tbody>
-        </table>
-      </div>
+      <GiphySearch onSearch={addGiphy} />
+      <GiphyResults giphies={giphies}/>
     </div>
   );
 }

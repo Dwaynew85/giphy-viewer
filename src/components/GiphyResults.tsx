@@ -7,5 +7,5 @@ interface GiphyResultsProps {
 export const GiphyResults: FC<GiphyResultsProps> = ({url}) =>
 <div>
   <h2>Results</h2>
-
+  <img src="" alt="search result"/>
 </div>

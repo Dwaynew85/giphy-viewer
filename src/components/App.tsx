@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { GiphyList } from '../model/Giphy';
+import { GiphyData } from '../model/Giphy';
 import { searchGiphies } from '../services/GiphyService';
 import { ErrorAlert, WarningAlert } from './Alerts';
 import './App.css';
@@ -7,7 +7,7 @@ import { GiphyResults } from './GiphyResults';
 import { GiphySearch } from './GiphySearch';
 
 function App() {
-  const [giphies, setGiphies] = useState<GiphyList[]>([]);
+  const [giphies, setGiphies] = useState<GiphyData[]>([]);
   const [error, setError] = useState('');
   const [warning, setWarning] = useState('');
 
@@ -15,15 +15,15 @@ function App() {
     setError('');
     setWarning('');
   }
-  
+  console.log(giphies)
   const addGiphy = async (term: string) => {
     resetAlerts();
     const giphs = await searchGiphies(term);
-
+    console.log(giphs)
     if (!giphs) {
       setError(`No Giphies found called '${term}'`);
     } else {
-      setGiphies([giphs])
+      // setGiphies([giphs])
     }
   }
   
@@ -33,7 +33,7 @@ function App() {
       <GiphySearch onSearch={addGiphy} />
       <ErrorAlert message={error}/>
       <WarningAlert message={warning}/>
-      <GiphyResults giphies={giphies}/>
+      {/* {giphies.map((giphy) => <GiphyResults key={giphy.id} url={giphy.url}/>)} */}
     </div>
   );
 }
